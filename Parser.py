@@ -14,7 +14,7 @@ def parse() -> list:
             print("ОШИБКА! Не удалось подключиться к omgtu.ru")
             exit(1)
         soup = BeautifulSoup(page.text, "html.parser")  # передаем страницу в bs4
-        block = soup.findAll('h3', class_='news-card__title')  # находим  контейнер с нужным классом
+        block = soup.findAll('h3', class_='news-card__title')  # находим контейнер с нужным классом
         for data in block:  # проходим циклом по содержимому контейнера
             text = normalize(data.text)
             headings.append(text)  # добавляем обработанный текст заголовка в список
@@ -26,7 +26,7 @@ def parse() -> list:
 
 
 def normalize(text: str) -> str:  # преобразуем строку в нормальный вид
-    return text.replace('\n', '').strip(' ') + '\n'  # убираем лишние пробелы, перенос строки ставим в конце
+    return text.replace('\n', '').strip(' ')  # убираем лишние пробелы и перенос строки в начале
 
 
 def parse_amount() -> int:
@@ -37,9 +37,9 @@ def parse_amount() -> int:
         print("ОШИБКА! Не удалось подключиться к omgtu.ru")
         exit(1)
     soup = BeautifulSoup(page.text, "html.parser")  # передаем страницу в bs4
-    block = soup.findAll('font', class_='text')  # находим  контейнер с нужным классом
+    block = soup.findAll('font', class_='text')  # находим контейнер с нужным классом
     for data in block:
-        pointer = data.text.find("из")  # ищем кодовое слово 'из' (страница xxx из xxx )
+        pointer = data.text.find("из")  # ищем кодовое слово 'из' (страница xxx из xxx)
         if pointer == -1:  # если в текущем блоке не найдено, идём к следующему
             continue
         amount = int(data.text[pointer + 3::])  # делаем срез и конвертируем в число
