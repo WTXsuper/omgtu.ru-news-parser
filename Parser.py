@@ -41,7 +41,7 @@ def parse_amount() -> int:
     for data in block:
         pointer = data.text.find("из")  # ищем кодовое слово 'из' (страница xxx из xxx )
         if pointer == -1:  # если в текущем блоке не найдено, идём к следующему
-            break
+            continue
         amount = int(data.text[pointer + 3::])  # делаем срез и конвертируем в число
     print("НАЙДЕНО СТАТЕЙ:", amount)
     return amount
