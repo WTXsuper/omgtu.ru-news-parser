@@ -3,4 +3,4 @@ from Saver import save
 from datetime import datetime  # импортируем библиотеку для работы с датой и временем
 
 if __name__ == '__main__':
-    save(parser())
+    save(parse())
